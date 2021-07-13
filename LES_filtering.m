@@ -14,7 +14,7 @@ clear all variables
 
 load('data.mat') % subset of JHTDB channel data
 
-sigma = 0.5; % standard dev based on channel half height (h=1 when nd)
+sigma = 1; % standard dev based on channel half height (h=1 when nd)
 
 %%
 % Filter + define large scales 
