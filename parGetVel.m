@@ -5,7 +5,7 @@
 % Algorithm by:
 %
 % Alan Hong
-% University of Illinois - Urbana Champaign
+% University of Illinois at Urbana-Champaign
 % Saxton-Fox Group @ UIUC
 %
 % Ricky Hsu

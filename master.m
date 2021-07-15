@@ -3,11 +3,16 @@
 % Written by:
 %
 % Alan Hong
-% University of Illinois - Urbana Champaign
+% University of Illinois at Urbana-Champaign
 % Saxton-Fox Group @ UIUC
 %
-
-mkdir data
+%
+%
+%
+%
+%
+%
+%
 
 clear all;
 close all;
@@ -30,15 +35,18 @@ nmax = 4096;
 n = npoints/nmax;
 
 % construct grid
-x = linspace(0, 8*pi, nx);
-y = linspace(-1, 1, ny);
-z = linspace(0, 3*pi, nz);
+h = 1; % channel half height
+L = 8*pi; % streamwise length
+W = 3*pi; % channel width
+x = linspace(0, L, nx);
+y = linspace(-h, h, ny);
+z = linspace(0, W, nz);
 [X, Y, Z] = meshgrid(x, y, z);
 
 % specify grid spacing
-hx = x(2) - x(1);
-hy = y(2) - y(1);
-hz = z(2) - z(1);
+dx = x(2) - x(1);
+dy = y(2) - y(1);
+dz = z(2) - z(1);
 
 % adjust point structure
 points = zeros(3, nmax, n);
@@ -50,8 +58,13 @@ points(3,:,:) = reshape(Z(:), nmax, n);
 Spatial = 'Lag4';
 Temporal = 'None';
 
-% get velocities at each point for Nt snapshots in time
+L_T = 0.07*W; % turbulent length scale
+Gstd = L_T/6; % standard deviation of Gaussian filter
+
+% ---- Core Task ----
+% purge exhausted variables
 for idx = 0:Nt-1
+    % get velocity at each point
     [u, v, w] = parGetVel(t0+5*dt*idx, nmax, n, points, Spatial, Temporal);
     U = reshape(u(:), ny, nx, nz);
     clear u;
@@ -59,6 +72,18 @@ for idx = 0:Nt-1
     clear v;
     W = reshape(w(:), ny, nx, nz);
     clear w;
-    save(['./data/t_' num2str(idx) '.mat'],'U','V','W','-v7.3');
-    tau = Smagorinsky(U, V, W, hx, hy, hz);
+    
+    % ---- A Priori Analysis ----
+    [T,Sbar] = ExactSGS(U,V,W,Gstd,dx,dy,dz);
+    
+    % ---- Smagorinsky ----
+    nu = Smagorinsky(L_T,Sbar);
+    
+    % eddy-viscosity closure
+    T11 = nu.*Sbar{1,1}; Sbar(1,1) = {[]};
+    T12 = nu.*Sbar{1,2}; Sbar(1,2) = {[]};
+    T13 = nu.*Sbar{1,3}; Sbar(1,3) = {[]};
+    T22 = nu.*Sbar{2,2}; Sbar(2,2) = {[]};
+    T23 = nu.*Sbar{2,3}; Sbar(2,3) = {[]};
+    T33 = nu.*Sbar{3,3}; Sbar(3,3) = {[]};
 end
