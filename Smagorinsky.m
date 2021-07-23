@@ -1,8 +1,9 @@
 function ev = Smagorinsky(Delta,S);
-% Returns kinematic eddy viscosity
-% calculate invariant
-Snorm = sqrt(2*(S{1,1}.*S{1,1} + 2*S{1,2}.*S{1,2} + 2*S{1,3}.*S{1,3} ...
-    + S{2,2}.*S{2,2} + 2*S{2,3}.*S{2,3} + S{3,3}.*S{3,3}));
+    % Returns kinematic eddy viscosity
+    % calculate invariant
+    Snorm = sqrt(2*(S.S11.*S.S11 + 2*S.S12.*S.S12 + 2*S.S13.*S.S13 ...
+        + S.S22.*S.S22 + 2*S.S23.*S.S23 + S.S33.*S.S33));
 
-cs = 0.16; % Smagorinsky coefficient
-ev = -2*(cs*Delta)^2*Snorm; % eddy viscosity
+    cs = 0.16; % Smagorinsky coefficient
+    ev = -2*(cs*Delta)^2*Snorm; % eddy viscosity
+end
