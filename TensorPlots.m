@@ -1,5 +1,12 @@
+% TensorPlots.m ... Plotting function for master.m
+% fields: Tensor components requested to plot
+%    X,Y: Coordinate grid
+%  T,mod: Exact and model stress tensors
+% zslice: Location of 2D plane taken for plotting
+%  axlim: 2D Axis limits
 function TensorPlots(fields,X,Y,T,mod,zslice,axlim,dependency,symmetry);
     for idx = 1:numel(fields)
+        % generate requested colorbar limits
         [lim1, lim2] = setColorbar(T,mod,fields{idx},zslice,dependency,symmetry);
         
         figure(idx); clf;

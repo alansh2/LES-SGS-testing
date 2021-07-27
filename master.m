@@ -127,11 +127,11 @@ corr = mod.T11.*S.S11 + 2*mod.T12.*S.S12 + 2*mod.T13.*S.S13 ...
 
 
 %% Plots
-% setup colorbar limits
+% setup
 zslice = uint16(nz/2);
 axlim = [min(x) max(x) min(y) max(y)];
+fields = {'T12','T13','T23'}; % choose components
 % get plots
 dependency = 'match'; % match, none
 symmetry = 'symmetric'; % symmetric, none
-fields = {'T12','T13','T23'};
 TensorPlots(fields,X,Y,T,mod,zslice,axlim,dependency,symmetry);
