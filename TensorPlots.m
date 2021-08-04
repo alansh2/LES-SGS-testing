@@ -5,6 +5,7 @@
 % zslice: Location of 2D plane taken for plotting
 %  axlim: 2D Axis limits
 function TensorPlots(fields,X,Y,T,mod,zslice,axlim,dependency,symmetry);
+    name = mod.Name; % model name
     for idx = 1:numel(fields)
         % generate requested colorbar limits
         [lim1, lim2] = setColorbar(T,mod,fields{idx},zslice,dependency,symmetry);
@@ -25,7 +26,7 @@ function TensorPlots(fields,X,Y,T,mod,zslice,axlim,dependency,symmetry);
         subplot(2,1,2)
         contourf(X(:,:,zslice), Y(:,:,zslice), mod.(fields{idx})(:,:,zslice), 30, 'LineStyle', 'none');
         set(gca, 'FontSize', 11);
-        title([fields{idx} ' Model'], 'FontSize', 13, 'FontWeight', 'bold');
+        title([fields{idx} ' ' name], 'FontSize', 13, 'FontWeight', 'bold');
         xlabel('x', 'FontSize', 12, 'FontWeight', 'bold');
         ylabel('y', 'FontSize', 12, 'FontWeight', 'bold');
         axis(axlim);
@@ -36,7 +37,7 @@ function TensorPlots(fields,X,Y,T,mod,zslice,axlim,dependency,symmetry);
         fig = gcf;
         fig.PaperUnits = 'points';
         fig.PaperPosition = [0 0 1000 500];
-        print(fields{idx},'-dpng','-r300')
+        print([fields{idx} '_' name],'-dpng','-r300')
     end
 end
 
