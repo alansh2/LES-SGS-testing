@@ -1,7 +1,7 @@
-% TensorPlots.m ... Plotting function for master.m
+% TensorPlots.m ... Plotting function for tensor components
 % fields: Tensor components requested to plot
 %    X,Y: Coordinate grid
-%  T,mod: Exact and model stress tensors
+%  T,mod: Exact and model stress tensors, respectively
 % zslice: Location of 2D plane taken for plotting
 %  axlim: 2D Axis limits
 function TensorPlots(fields,X,Y,T,mod,zslice,axlim,dependency,symmetry);

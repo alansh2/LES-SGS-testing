@@ -1,4 +1,5 @@
 function ev = WallAdapting(Delta,S,g);
+mkdir temp
 Sid = {'S11','S12','S13';
        'S12','S22','S23';
        'S13','S23','S33'};
@@ -28,3 +29,4 @@ end
 Sd2 = 1/6*(S2.^2 + O2.^2) + 2/3*S2.*O2 + 2*IV;
 cw = 0.56;
 ev = (cw*Delta)^2*(Sd2.^1.5)./(S2.^2.5 + Sd2.^1.25);
+delete('./temp/*.mat');
