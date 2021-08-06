@@ -7,7 +7,7 @@ stdarg = num2cell(std);
 [stdx,stdy,stdz] = deal(stdarg{:});
 kernel = 2*ceil(3*[stdx stdz])+1;
 
-for idx = 1:nuy
+parfor idx = 1:nuy
     Uin(idx,:,:) = imgaussfilt(Uin(idx,:,:),[stdx stdz],'FilterSize',kernel);
 end
 
