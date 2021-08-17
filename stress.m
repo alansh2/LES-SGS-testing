@@ -1,7 +1,7 @@
 % stress.m ... 
 
-clear
-close all
+clear all;
+close all;
 
 % read data
 load('properties.mat');

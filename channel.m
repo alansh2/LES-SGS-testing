@@ -25,28 +25,20 @@ parpool(pc, str2num(getenv('SLURM_CPUS_ON_NODE')));
 time = 0.0;
 
 % channel geometry
-h = 1; % channel half height
 L = 8*pi; % streamwise length
 D = 3*pi; % channel depth
 
 % construct grid
-% build y from imported y+
-df = importdata('profiles.txt',' ',2);
-ypl = df.data(1:256,1)';
-v = 5e-5; ut = 4.9968e-2;
-yL = ypl*v/ut - h;
-y = [yL -flip(yL)];
-
 nx = 2048;
+x = linspace(0, L, nx);
+y = importdata('y.txt')';
 ny = length(y);
 nz = 1536;
+z = linspace(0, D, nz);
+[X, Y, Z] = meshgrid(x, y, z);
 npoints = nx*ny*nz;
 nmax = 4096;
 n = npoints/nmax;
-
-x = linspace(0, L, nx);
-z = linspace(0, D, nz);
-[X, Y, Z] = meshgrid(x, y, z);
 
 % adjust point structure
 points = zeros(3, nmax, n);

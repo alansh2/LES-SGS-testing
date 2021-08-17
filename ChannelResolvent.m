@@ -1,7 +1,7 @@
 % ChannelResolvent.m ... 
 
-clear
-close all
+clear all;
+close all;
 
 % read data
 df = matfile('data.mat');
@@ -19,7 +19,7 @@ d_h = 8*h*D/P; % hydraulic diameter
 % characteristic length scale as defined by
 % https://www.cfd-online.com/Wiki/Hydraulic_diameter
 Delta = 0.07*d_h;
-Gstd = sqrt(Delta^2/12)*[1/dx 1 1/dz]; % standard deviation of Gaussian filter
+Gstd = Delta/sqrt(12)*[1/dx 1 1/dz]; % standard deviation of Gaussian filter
 save('properties.mat','Delta','Gstd');
 
 % resolved scales from Gaussian filter

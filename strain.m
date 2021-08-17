@@ -1,7 +1,7 @@
 % strain.m ... 
 
-clear
-close all
+clear all;
+close all;
 
 load('resolved.mat')
 df = matfile('data.mat');
