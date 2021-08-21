@@ -8,5 +8,10 @@ This parallel script collects DNS data at one instance in time specified by vari
 This serial script applies a Gaussian filter on the data contained in `data.mat` that filters out features with length less than *Delta*. The standard deviation for the Gaussian filter, *Gstd*, is calculated from the user-defined value for *Delta*. The outputs are the save files `properties.mat` containing variables *Delta*, *Gstd* and `resolved.mat` containing variables *Gu1*, *Gu2*, *Gu3*.
 ### stress.m
 ### strain.m
+### SGSmodels.m
 ## Functions
+### GaussianFilter.m
+### Smagorinsky.m
+### WallAdapting.m
+### closure.m
 ### TensorPlots.m
