@@ -9,6 +9,7 @@ This serial script applies a Gaussian filter using `GaussianFilter.m` on the dat
 ### stress.m
 This serial script computes the exact subgrid-scale stress tensor. Resolved scales are read from `resolved.mat`. The remaining filtering operations are carried out by `GaussianFilter.m` using the standard deviation *Gstd* from `properties.mat`.
 ### strain.m
+This serial script computes the velocity gradient tensor and strain rate tensor to be used in sub-grid scale models. The resolved scales of which the gradients are taken are loaded from `resolved.mat`. The coordinate grid is loaded from `data.mat`.
 ### SGSmodels.m
 ## Functions
 ### GaussianFilter.m
